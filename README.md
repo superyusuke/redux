@@ -7,8 +7,12 @@ Redux は javaScript アプリケーションのための、予測可能な stat
 
 It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test. On top of that, it provides a great developer experience, such as [live code editing combined with a time traveling debugger](https://github.com/gaearon/redux-devtools).
 
+その性質のおかげで、一貫した挙動をする、そして様々な環境で動く(クライアントサイドでも、サーバーサイドでも、そしてネイティブアプリ上でも動きます)、テストが簡単なアプリケーションを書くことができます。さらに、次のアプリケーションのような非常に快適な開発体験をも提供します。([live code editing combined with a time traveling debugger](https://github.com/gaearon/redux-devtools))
+
 You can use Redux together with [React](https://facebook.github.io/react/), or with any other view library.  
 It is tiny (2kB, including dependencies).
+
+Redux を React と組み合わせ使うことができますし、React 以外のライブラリと組み合わせることもできます。Redux のサイズは非常に小さく、依存ファイルを含めても2kB しかありません。
 
 [![build status](https://img.shields.io/travis/reactjs/redux/master.svg?style=flat-square)](https://travis-ci.org/reactjs/redux)
 [![npm version](https://img.shields.io/npm/v/redux.svg?style=flat-square)](https://www.npmjs.com/package/redux)
