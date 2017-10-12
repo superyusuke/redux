@@ -3,7 +3,7 @@
 Redux is a predictable state container for JavaScript apps.  
 (If you're looking for a WordPress framework, check out [Redux Framework](https://reduxframework.com/).)
 
-Redux は javaScript アプリケーションの予測可能な state コンテインターです。
+Redux は javaScript アプリケーションのための、予測可能な state コンテイナーです。(訳注:Redux は state 状態を管理するためのツールで、特に state の変更が追跡できる、純粋関数を元にした変更なので、挙動が一定である = "Predictable" である、といった点が特徴。)
 
 It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test. On top of that, it provides a great developer experience, such as [live code editing combined with a time traveling debugger](https://github.com/gaearon/redux-devtools).
 
