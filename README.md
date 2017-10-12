@@ -67,8 +67,9 @@ This assumes you are using [npm](https://www.npmjs.com/) as your package manager
 
 上記のコマンドは、[npm](https://www.npmjs.com/) をパッケージ・マネージャーとしている前提のものです。
 
-
 If you're not, you can [access these files on unpkg](https://unpkg.com/redux/), download them, or point your package manager to them.
+
+npm を使わない場合には、[unpkg から](https://unpkg.com/redux/) ファイルを手に入れることができます。ファイルをダウンロードするか、もしくはお使いのパッケージマネージャー上記URLを指定してください。
 
 Most commonly people consume Redux as a collection of [CommonJS](http://webpack.github.io/docs/commonjs.html) modules. These modules are what you get when you import `redux` in a [Webpack](https://webpack.js.org/), [Browserify](http://browserify.org/), or a Node environment. If you like to live on the edge and use [Rollup](http://rollupjs.org), we support that as well.
 
@@ -107,13 +108,33 @@ import { createStore } from 'redux'
 
 /**
  * This is a reducer, a pure function with (state, action) => state signature.
+ 
+ * 次の関数がReducerです。これは純粋関数でなければいけず、
+ * また(state, action ) の２つを与えて、state を return するというのが、特徴です。
+ 
  * It describes how an action transforms the state into the next state.
- *
+ 
+ * Reducer は、"action"がどのように状態satateを変更し、
+ * 新しい状態 next state を作り出すかを定義しています。
+ 
  * The shape of the state is up to you: it can be a primitive, an array, an object,
+ 
+ * 状態の形式は自由で、普通の配列やオブジェクトでもいいですし、
+ 
  * or even an Immutable.js data structure. The only important part is that you should
+ 
+ * ほかにも Immutable.js を使ったデータ形式でも良いです。重要なのは、状態を変更する場合に、
+ 
  * not mutate the state object, but return a new object if the state changes.
- *
+ 
+ * 状態管理用のオブジェクトを、直接変化させるのではなく、
+ * 新しく新しい状態を持ったオブジェクトを作り、それを return することです。
+ 
  * In this example, we use a `switch` statement and strings, but you can use a helper that
+ 
+ * この例では、"switch文"と文字列を使って分岐を行っていますが、
+ * 他の方法、例えば maps 関数などを使うこともできます。
+ 
  * follows a different convention (such as function maps) if it makes sense for your
  * project.
  */
@@ -130,6 +151,12 @@ function counter(state = 0, action) {
 
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
+
+// 次のコードは、Redux 用のstore を作り、それに自分のアプリケーションの
+// 状態を与えています。
+// (訳注：さらに、引数としてreducerであるcounterを与えている。
+// reducerには初期値が与えられているので結果として、ここではstate=0が与えられている。)
+// このようにして作られたstoreには{ subscribe, dispatch, getState } などの API を持っています。
 let store = createStore(counter)
 
 // You can use subscribe() to update the UI in response to state changes.
