@@ -3,6 +3,8 @@
 Redux is a predictable state container for JavaScript apps.  
 (If you're looking for a WordPress framework, check out [Redux Framework](https://reduxframework.com/).)
 
+Redux は javaScript アプリケーションの予測可能な state コンテインターです。
+
 It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test. On top of that, it provides a great developer experience, such as [live code editing combined with a time traveling debugger](https://github.com/gaearon/redux-devtools).
 
 You can use Redux together with [React](https://facebook.github.io/react/), or with any other view library.  
@@ -73,13 +75,20 @@ npm install --save-dev redux-devtools
 
 Note that unlike Redux itself, many packages in the Redux ecosystem don't provide UMD builds, so we recommend using CommonJS module bundlers like [Webpack](https://webpack.js.org/) and [Browserify](http://browserify.org/) for the most comfortable development experience.
 
-### The Gist
+### 概要
+The Gist
 
 The whole state of your app is stored in an object tree inside a single *store*.  
 The only way to change the state tree is to emit an *action*, an object describing what happened.  
 To specify how the actions transform the state tree, you write pure *reducers*.
 
+あなたが作っているアプリケーションの状態 state を全て、たったひとつのオブジェクトで管理し、そしてそれを”store” という変数に入れる。(訳注：もしくは store という概念と紐付けて運用する) 状態を変更する方法は制限されており、”action”を発行する(=emit) 方法だけしかない。action は”何を起こすか”が述べられているオブジェクトである。”action”が状態に対して、どのような変更を加えるのかは、”reducer” によって定義する。reducer は純粋関数である必要がある。
+
+(訳注：純粋関数については例えばこの記事を参照。Redux と state の関連では、私が理解する限り、関数の引数で与えられたもの以外の変動する値を関数内部で使わない(例えば引数では与えられていないグローバル変数など)、引数で与えられたものそのものを変更しない＝イミュータブル、return で新たなstateを返す、というルールを守れば良い。)
+
 That's it!
+
+それで全てです!
 
 ```js
 import { createStore } from 'redux'
@@ -131,9 +140,15 @@ store.dispatch({ type: 'DECREMENT' })
 
 Instead of mutating the state directly, you specify the mutations you want to happen with plain objects called *actions*. Then you write a special function called a *reducer* to decide how every action transforms the entire application's state.
 
+状態を直接変更するのではなく、まずどのような変化を起こしたいのかを plain なオブジェクトに記述します。これを action と呼びます。次に reducer とよばれる特別な関数を書き、それぞれの action がどのように状態全体を変更するのかを規定します。
+
 If you're coming from Flux, there is a single important difference you need to understand. Redux doesn't have a Dispatcher or support many stores. Instead, there is just a single store with a single root reducing function. As your app grows, instead of adding stores, you split the root reducer into smaller reducers independently operating on the different parts of the state tree. This is exactly like how there is just one root component in a React app, but it is composed out of many small components.
 
+もし以前に Flux を使ったことがあるのであれば、Flux と Redux には一つ重要な違いがありますので、その点を理解してください。Redux は Dispathcer を持たず、また複数の store を持つこともできません。Redux は一つだけ sotre を持ち、それに対して一つだけ reducer を付加することができます。アプリケーションの規模が大きくなる場合には、store を増やすのではなく、root reducer をより小さな reducer へと分割し、それぞれの reducer が、状態ツリーのの異なる場所を担当するようにします。これはちょうど、React がルートコンポーネントをひとつだけ持ち、しかしルートコンポーネントが、沢山の小さなコンポーネントの組み合わせでできているのと、同じようなものです。
+
 This architecture might seem like an overkill for a counter app, but the beauty of this pattern is how well it scales to large and complex apps. It also enables very powerful developer tools, because it is possible to trace every mutation to the action that caused it. You can record user sessions and reproduce them just by replaying every action.
+
+このような構造は、恐らくちょっとしたカウンター・アプリには大げさすぎるのでしょうが、その強みは、より大きく複雑なアプリケーションになったときに発揮されます。また強力な開発者ツールも提供していますので、これによって全ての変更を追いかけることができます。ユーザーの操作を全て記録し、その全てのアクションを再度実行することで、これを再現することもできます。
 
 ### Learn Redux from Its Creator
 
