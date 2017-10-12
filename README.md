@@ -21,7 +21,8 @@ Redux を React と組み合わせ使うことができますし、React 以外�
 [![#rackt on freenode](https://img.shields.io/badge/irc-%23rackt%20%40%20freenode-61DAFB.svg?style=flat-square)](https://webchat.freenode.net/)
 [![Changelog #187](https://img.shields.io/badge/changelog-%23187-lightgrey.svg?style=flat-square)](https://changelog.com/187)
 
->**Learn Redux from its creator:**  
+>**Learn Redux from its creator:**
+>**Redux の作者から学ぶ動画コンテンツ:**
 >**[Part 1: Getting Started with Redux](https://egghead.io/series/getting-started-with-redux) (30 free videos)**<br>
 >**[Part 2: Building React Applications with Idiomatic Redux](https://egghead.io/courses/building-react-applications-with-idiomatic-redux) (27 free videos)**
 
@@ -50,15 +51,22 @@ I wrote Redux while working on my React Europe talk called [“Hot Reloading wit
 Redux evolves the ideas of [Flux](http://facebook.github.io/flux/), but avoids its complexity by taking cues from [Elm](https://github.com/evancz/elm-architecture-tutorial/).  
 Whether you have used them or not, Redux only takes a few minutes to get started with.
 
+Redux は [Flux](http://facebook.github.io/flux/) を発展させたもので、それでいて [Elm](https://github.com/evancz/elm-architecture-tutorial/) からヒントを得たことで、Flux の複雑性を取り除いています。
+
 ### Installation
 
 To install the stable version:
+
+Redux の安定バージョンをインストールするためには以下のコマンドを実行します。
 
 ```
 npm install --save redux
 ```
 
-This assumes you are using [npm](https://www.npmjs.com/) as your package manager.  
+This assumes you are using [npm](https://www.npmjs.com/) as your package manager.
+
+上記のコマンドは、[npm](https://www.npmjs.com/) をパッケージ・マネージャーとしている前提のものです。
+
 
 If you're not, you can [access these files on unpkg](https://unpkg.com/redux/), download them, or point your package manager to them.
 
