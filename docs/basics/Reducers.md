@@ -1,15 +1,21 @@
 # Reducers
 
-[Actions](./Actions.md) describe the fact that *something happened*, but don't specify how the application's state changes in response. This is the job of reducers.
+[Actions](./Actions.md) describe the fact that _something happened_, but don't specify how the application's state changes in response. This is the job of reducers.
+
+Actionは何かが発生した、という事実を記述していました。しかしそれに呼応して、どのようにアプリケーションの状態が変化するのか、ということは全く定義していません。それは「Reducer」の仕事です。
 
 ## Designing the State Shape
 
 In Redux, all the application state is stored as a single object. It's a good idea to think of its shape before writing any code. What's the minimal representation of your app's state as an object?
 
+Reduxにおいては、アプリケーションの全ての状態は、ひとつのオブジェクトとして保持されます。コードを書く前に、状態がどのような形になるのか考えてみることにしましょう。あなたのアプリケーションの状態を表すオブジェクトは、一番簡潔に表現するとしたら、どのようなものになるでしょうか？
+
 For our todo app, we want to store two different things:
 
-* The currently selected visibility filter;
-* The actual list of todos.
+いまから作ろうとしているtodo appにおいては、二つの異なるものを保持しないといけませんね。
+
+* The currently selected visibility filter;  現在選択されているフィルター
+* The actual list of todos.  todoの書かれたリスト
 
 You'll often find that you need to store some data, as well as some UI state, in the state tree. This is fine, but try to keep the data separate from the UI state.
 
@@ -29,9 +35,9 @@ You'll often find that you need to store some data, as well as some UI state, in
 }
 ```
 
->##### Note on Relationships
-
->In a more complex app, you're going to want different entities to reference each other. We suggest that you keep your state as normalized as possible, without any nesting. Keep every entity in an object stored with an ID as a key, and use IDs to reference it from other entities, or lists. Think of the app's state as a database. This approach is described in [normalizr's](https://github.com/paularmstrong/normalizr) documentation in detail. For example, keeping `todosById: { id -> todo }` and `todos: array<id>` inside the state would be a better idea in a real app, but we're keeping the example simple.
+> ##### Note on Relationships
+>
+> In a more complex app, you're going to want different entities to reference each other. We suggest that you keep your state as normalized as possible, without any nesting. Keep every entity in an object stored with an ID as a key, and use IDs to reference it from other entities, or lists. Think of the app's state as a database. This approach is described in [normalizr's](https://github.com/paularmstrong/normalizr) documentation in detail. For example, keeping `todosById: { id -> todo }` and `todos: array<id>` inside the state would be a better idea in a real app, but we're keeping the example simple.
 
 ## Handling Actions
 
@@ -99,19 +105,19 @@ function todoApp(state = initialState, action) {
 
 Note that:
 
-1. **We don't mutate the `state`.** We create a copy with [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign). `Object.assign(state, { visibilityFilter: action.filter })` is also wrong: it will mutate the first argument. You **must** supply an empty object as the first parameter. You can also enable the [object spread operator proposal](../recipes/UsingObjectSpreadOperator.md) to write `{ ...state, ...newState }` instead.
+1. **We don't mutate the **`state`**.** We create a copy with [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign). `Object.assign(state, { visibilityFilter: action.filter })` is also wrong: it will mutate the first argument. You **must** supply an empty object as the first parameter. You can also enable the [object spread operator proposal](../recipes/UsingObjectSpreadOperator.md) to write `{ ...state, ...newState }` instead.
 
-2. **We return the previous `state` in the `default` case.** It's important to return the previous `state` for any unknown action.
+2. **We return the previous **`state`** in the **`default`** case.** It's important to return the previous `state` for any unknown action.
 
->##### Note on `Object.assign`
-
->[`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) is a part of ES6, but is not implemented by most browsers yet. You'll need to either use a polyfill, a [Babel plugin](https://www.npmjs.com/package/babel-plugin-transform-object-assign), or a helper from another library like [`_.assign()`](https://lodash.com/docs#assign).
-
->##### Note on `switch` and Boilerplate
-
->The `switch` statement is *not* the real boilerplate. The real boilerplate of Flux is conceptual: the need to emit an update, the need to register the Store with a Dispatcher, the need for the Store to be an object (and the complications that arise when you want a universal app). Redux solves these problems by using pure reducers instead of event emitters.
-
->It's unfortunate that many still choose a framework based on whether it uses `switch` statements in the documentation. If you don't like `switch`, you can use a custom `createReducer` function that accepts a handler map, as shown in [“reducing boilerplate”](../recipes/ReducingBoilerplate.md#reducers).
+> ##### Note on `Object.assign`
+>
+> [`Object.assign()`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign) is a part of ES6, but is not implemented by most browsers yet. You'll need to either use a polyfill, a [Babel plugin](https://www.npmjs.com/package/babel-plugin-transform-object-assign), or a helper from another library like [`_.assign()`](https://lodash.com/docs#assign).
+>
+> ##### Note on `switch` and Boilerplate
+>
+> The `switch` statement is _not_ the real boilerplate. The real boilerplate of Flux is conceptual: the need to emit an update, the need to register the Store with a Dispatcher, the need for the Store to be an object \(and the complications that arise when you want a universal app\). Redux solves these problems by using pure reducers instead of event emitters.
+>
+> It's unfortunate that many still choose a framework based on whether it uses `switch` statements in the documentation. If you don't like `switch`, you can use a custom `createReducer` function that accepts a handler map, as shown in [“reducing boilerplate”](../recipes/ReducingBoilerplate.md#reducers).
 
 ## Handling More Actions
 
@@ -246,16 +252,18 @@ function todoApp(state = initialState, action) {
 }
 ```
 
-Note that `todos` also accepts `state`—but it's an array! Now `todoApp` just gives it the slice of the state to manage, and `todos` knows how to update just that slice. **This is called *reducer composition*, and it's the fundamental pattern of building Redux apps.**
+Note that `todos` also accepts `state`—but it's an array! Now `todoApp` just gives it the slice of the state to manage, and `todos` knows how to update just that slice. **This is called **_**reducer composition**_**, and it's the fundamental pattern of building Redux apps.**
 
 Let's explore reducer composition more. Can we also extract a reducer managing just `visibilityFilter`? We can.
 
 Below our imports, let's use [ES6 Object Destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) to declare `SHOW_ALL`:
+
 ```js
 const { SHOW_ALL } = VisibilityFilters
 ```
 
 Then:
+
 ```js
 function visibilityFilter(state = SHOW_ALL, action) {
   switch (action.type) {
@@ -311,7 +319,7 @@ function todoApp(state = {}, action) {
 }
 ```
 
-**Note that each of these reducers is managing its own part of the global state. The `state` parameter is different for every reducer, and corresponds to the part of the state it manages.**
+**Note that each of these reducers is managing its own part of the global state. The **`state`** parameter is different for every reducer, and corresponds to the part of the state it manages.**
 
 This is already looking good! When the app is larger, we can split the reducers into separate files and keep them completely independent and managing different data domains.
 
@@ -361,18 +369,18 @@ function reducer(state = {}, action) {
 
 All [`combineReducers()`](../api/combineReducers.md) does is generate a function that calls your reducers **with the slices of state selected according to their keys**, and combining their results into a single object again. [It's not magic.](https://github.com/reactjs/redux/issues/428#issuecomment-129223274) And like other reducers, `combineReducers()` does not create a new object if all of the reducers provided to it do not change state.
 
->##### Note for ES6 Savvy Users
-
->Because `combineReducers` expects an object, we can put all top-level reducers into a separate file, `export` each reducer function, and use `import * as reducers` to get them as an object with their names as the keys:
-
->```js
->import { combineReducers } from 'redux'
->import * as reducers from './reducers'
+> ##### Note for ES6 Savvy Users
 >
->const todoApp = combineReducers(reducers)
->```
+> Because `combineReducers` expects an object, we can put all top-level reducers into a separate file, `export` each reducer function, and use `import * as reducers` to get them as an object with their names as the keys:
 >
->Because `import *` is still new syntax, we don't use it anymore in the documentation to avoid [confusion](https://github.com/reactjs/redux/issues/428#issuecomment-129223274), but you may encounter it in some community examples.
+> ```js
+> import { combineReducers } from 'redux'
+> import * as reducers from './reducers'
+>
+> const todoApp = combineReducers(reducers)
+> ```
+>
+> Because `import *` is still new syntax, we don't use it anymore in the documentation to avoid [confusion](https://github.com/reactjs/redux/issues/428#issuecomment-129223274), but you may encounter it in some community examples.
 
 ## Source Code
 
@@ -432,3 +440,4 @@ export default todoApp
 ## Next Steps
 
 Next, we'll explore how to [create a Redux store](Store.md) that holds the state and takes care of calling your reducer when you dispatch an action.
+
