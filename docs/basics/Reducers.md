@@ -19,6 +19,8 @@ For our todo app, we want to store two different things:
 
 You'll often find that you need to store some data, as well as some UI state, in the state tree. This is fine, but try to keep the data separate from the UI state.
 
+
+
 ```js
 {
   visibilityFilter: 'SHOW_ALL',
