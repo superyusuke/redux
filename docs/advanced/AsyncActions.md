@@ -6,13 +6,17 @@ In the [basics guide](../basics/README.md), we built a simple todo application. 
 
 In this guide, we will build a different, asynchronous application. It will use the Reddit API to show the current headlines for a selected subreddit. How does asynchronicity fit into Redux flow?
 
-しかしこのセクションでは、そうではなくて、非同期なやり取りをするアプリケーションを作っていきます。そのために Reddit API を使用して、選択された subreddit 内の見出しを表示する。
+しかしこのセクションでは、そうではなくて、非同期なやり取りをするアプリケーションを作っていきます。そのために Reddit API を使用して、選択された subreddit 内の見出しを表示する機能を実装します。Redux のデータフロウにどのように非同期処理を組み込むのかみていきましょう。
 
 ## Actions
 
 When you call an asynchronous API, there are two crucial moments in time: the moment you start the call, and the moment when you receive an answer \(or a timeout\).
 
+非同期通信をおこなう API を呼び出す場合、2回重要な瞬間があります。それは呼び出す瞬間と、返答を受け取る瞬間です。\(もしくはタイムアウトの場合です。\)
+
 Each of these two moments usually require a change in the application state; to do that, you need to dispatch normal actions that will be processed by reducers synchronously. Usually, for any API request you'll want to dispatch at least three different kinds of actions:
+
+
 
 * **An action informing the reducers that the request began.**
 
