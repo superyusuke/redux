@@ -2,11 +2,15 @@
 
 In the [basics guide](../basics/README.md), we built a simple todo application. It was fully synchronous. Every time an action was dispatched, the state was updated immediately.
 
+基礎編ではシンプルな todo アプリを作ってきました。そのアプリケーションにおいては、全てのやり取りが同期的におこなわれていました。アクションが発行されると、即時 state が変更されるというものでした。
+
 In this guide, we will build a different, asynchronous application. It will use the Reddit API to show the current headlines for a selected subreddit. How does asynchronicity fit into Redux flow?
+
+しかしこのセクションでは、そうではなくて、非同期なやり取りをするアプリケーションを作っていきます。そのために Reddit API を使用して、選択された subreddit 内の見出しを表示する。
 
 ## Actions
 
-When you call an asynchronous API, there are two crucial moments in time: the moment you start the call, and the moment when you receive an answer (or a timeout).
+When you call an asynchronous API, there are two crucial moments in time: the moment you start the call, and the moment when you receive an answer \(or a timeout\).
 
 Each of these two moments usually require a change in the application state; to do that, you need to dispatch normal actions that will be processed by reducers synchronously. Usually, for any API request you'll want to dispatch at least three different kinds of actions:
 
@@ -88,7 +92,7 @@ function requestPosts(subreddit) {
 }
 ```
 
-It is important for it to be separate from `SELECT_SUBREDDIT` or `INVALIDATE_SUBREDDIT`. While they may occur one after another, as the app grows more complex, you might want to fetch some data independently of the user action (for example, to prefetch the most popular subreddits, or to refresh stale data once in a while). You may also want to fetch in response to a route change, so it's not wise to couple fetching to some particular UI event early on.
+It is important for it to be separate from `SELECT_SUBREDDIT` or `INVALIDATE_SUBREDDIT`. While they may occur one after another, as the app grows more complex, you might want to fetch some data independently of the user action \(for example, to prefetch the most popular subreddits, or to refresh stale data once in a while\). You may also want to fetch in response to a route change, so it's not wise to couple fetching to some particular UI event early on.
 
 Finally, when the network request comes through, we will dispatch `RECEIVE_POSTS`:
 
@@ -107,9 +111,9 @@ function receivePosts(subreddit, json) {
 
 This is all we need to know for now. The particular mechanism to dispatch these actions together with network requests will be discussed later.
 
->##### Note on Error Handling
-
->In a real app, you'd also want to dispatch an action on request failure. We won't implement error handling in this tutorial, but the [real world example](../introduction/Examples.md#real-world) shows one of the possible approaches.
+> ##### Note on Error Handling
+>
+> In a real app, you'd also want to dispatch an action on request failure. We won't implement error handling in this tutorial, but the [real world example](../introduction/Examples.md#real-world) shows one of the possible approaches.
 
 ## Designing the State Shape
 
@@ -155,13 +159,13 @@ There are a few important bits here:
 
 * For every list of items, you'll want to store `isFetching` to show a spinner, `didInvalidate` so you can later toggle it when the data is stale, `lastUpdated` so you know when it was fetched the last time, and the `items` themselves. In a real app, you'll also want to store pagination state like `fetchedPageCount` and `nextPageUrl`.
 
->##### Note on Nested Entities
-
->In this example, we store the received items together with the pagination information. However, this approach won't work well if you have nested entities referencing each other, or if you let the user edit items. Imagine the user wants to edit a fetched post, but this post is duplicated in several places in the state tree. This would be really painful to implement.
-
->If you have nested entities, or if you let users edit received entities, you should keep them separately in the state as if it was a database. In pagination information, you would only refer to them by their IDs. This lets you always keep them up to date. The [real world example](../introduction/Examples.md#real-world) shows this approach, together with [normalizr](https://github.com/paularmstrong/normalizr) to normalize the nested API responses. With this approach, your state might look like this:
-
->```js
+> ##### Note on Nested Entities
+>
+> In this example, we store the received items together with the pagination information. However, this approach won't work well if you have nested entities referencing each other, or if you let the user edit items. Imagine the user wants to edit a fetched post, but this post is duplicated in several places in the state tree. This would be really painful to implement.
+>
+> If you have nested entities, or if you let users edit received entities, you should keep them separately in the state as if it was a database. In pagination information, you would only refer to them by their IDs. This lets you always keep them up to date. The [real world example](../introduction/Examples.md#real-world) shows this approach, together with [normalizr](https://github.com/paularmstrong/normalizr) to normalize the nested API responses. With this approach, your state might look like this:
+>
+> ```js
 > {
 >   selectedSubreddit: 'frontend',
 >   entities: {
@@ -198,16 +202,16 @@ There are a few important bits here:
 >     }
 >   }
 > }
->```
-
->In this guide, we won't normalize entities, but it's something you should consider for a more dynamic application.
+> ```
+>
+> In this guide, we won't normalize entities, but it's something you should consider for a more dynamic application.
 
 ## Handling Actions
 
 Before going into the details of dispatching actions together with network requests, we will write the reducers for the actions we defined above.
 
->##### Note on Reducer Composition
-
+> ##### Note on Reducer Composition
+>
 > Here, we assume that you understand reducer composition with [`combineReducers()`](../api/combineReducers.md), as described in the [Splitting Reducers](../basics/Reducers.md#splitting-reducers) section on the [basics guide](../basics/README.md). If you don't, please [read it first](../basics/Reducers.md#splitting-reducers).
 
 #### `reducers.js`
@@ -290,6 +294,7 @@ In this code, there are two interesting parts:
     [action.subreddit]: posts(state[action.subreddit], action)
   })
   ```
+
   is equivalent to this:
 
   ```js
@@ -297,6 +302,7 @@ In this code, there are two interesting parts:
   nextState[action.subreddit] = posts(state[action.subreddit], action)
   return Object.assign({}, state, nextState)
   ```
+
 * We extracted `posts(state, action)` that manages the state of a specific post list. This is just [reducer composition](../basics/Reducers.md#splitting-reducers)! It is our choice how to split the reducer into smaller reducers, and in this case, we're delegating updating items inside an object to a `posts` reducer. The [real world example](../introduction/Examples.md#real-world) goes even further, showing how to create a reducer factory for parameterized pagination reducers.
 
 Remember that reducers are just functions, so you can use functional composition and higher-order functions as much as you feel comfortable.
@@ -372,23 +378,23 @@ export function fetchPosts(subreddit) {
 }
 ```
 
->##### Note on `fetch`
-
->We use [`fetch` API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API) in the examples. It is a new API for making network requests that replaces `XMLHttpRequest` for most common needs. Because most browsers don't yet support it natively, we suggest that you use [`isomorphic-fetch`](https://github.com/matthew-andrews/isomorphic-fetch) library:
-
->```js
->// Do this in every file where you use `fetch`
->import fetch from 'isomorphic-fetch'
->```
-
->Internally, it uses [`whatwg-fetch` polyfill](https://github.com/github/fetch) on the client, and [`node-fetch`](https://github.com/bitinn/node-fetch) on the server, so you won't need to change API calls if you change your app to be [universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9).
-
->Be aware that any `fetch` polyfill assumes a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) polyfill is already present. The easiest way to ensure you have a Promise polyfill is to enable Babel's ES6 polyfill in your entry point before any other code runs:
-
->```js
->// Do this once before any other code in your app
->import 'babel-polyfill'
->```
+> ##### Note on `fetch`
+>
+> We use [`fetch` API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API) in the examples. It is a new API for making network requests that replaces `XMLHttpRequest` for most common needs. Because most browsers don't yet support it natively, we suggest that you use [`isomorphic-fetch`](https://github.com/matthew-andrews/isomorphic-fetch) library:
+>
+> ```js
+> // Do this in every file where you use `fetch`
+> import fetch from 'isomorphic-fetch'
+> ```
+>
+> Internally, it uses [`whatwg-fetch` polyfill](https://github.com/github/fetch) on the client, and [`node-fetch`](https://github.com/bitinn/node-fetch) on the server, so you won't need to change API calls if you change your app to be [universal](https://medium.com/@mjackson/universal-javascript-4761051b7ae9).
+>
+> Be aware that any `fetch` polyfill assumes a [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) polyfill is already present. The easiest way to ensure you have a Promise polyfill is to enable Babel's ES6 polyfill in your entry point before any other code runs:
+>
+> ```js
+> // Do this once before any other code in your app
+> import 'babel-polyfill'
+> ```
 
 How do we include the Redux Thunk middleware in the dispatch mechanism? We use the [`applyMiddleware()`](../api/applyMiddleware.md) store enhancer from Redux, as shown below:
 
@@ -491,16 +497,17 @@ store
   .then(() => console.log(store.getState()))
 ```
 
->##### Note about Server Rendering
-
->Async action creators are especially convenient for server rendering. You can create a store, dispatch a single async action creator that dispatches other async action creators to fetch data for a whole section of your app, and only render after the Promise it returns, completes. Then your store will already be hydrated with the state you need before rendering.
+> ##### Note about Server Rendering
+>
+> Async action creators are especially convenient for server rendering. You can create a store, dispatch a single async action creator that dispatches other async action creators to fetch data for a whole section of your app, and only render after the Promise it returns, completes. Then your store will already be hydrated with the state you need before rendering.
 
 [Thunk middleware](https://github.com/gaearon/redux-thunk) isn't the only way to orchestrate asynchronous actions in Redux:
-- You can use [redux-promise](https://github.com/acdlite/redux-promise) or [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware) to dispatch Promises instead of functions.
-- You can use [redux-observable](https://github.com/redux-observable/redux-observable) to dispatch Observables.
-- You can use the [redux-saga](https://github.com/yelouafi/redux-saga/) middleware to build more complex asynchronous actions.
-- You can use the [redux-pack](https://github.com/lelandrichardson/redux-pack) middleware to dispatch promise-based asynchronous actions.
-- You can even write a custom middleware to describe calls to your API, like the [real world example](../introduction/Examples.md#real-world) does.
+
+* You can use [redux-promise](https://github.com/acdlite/redux-promise) or [redux-promise-middleware](https://github.com/pburtchaell/redux-promise-middleware) to dispatch Promises instead of functions.
+* You can use [redux-observable](https://github.com/redux-observable/redux-observable) to dispatch Observables.
+* You can use the [redux-saga](https://github.com/yelouafi/redux-saga/) middleware to build more complex asynchronous actions.
+* You can use the [redux-pack](https://github.com/lelandrichardson/redux-pack) middleware to dispatch promise-based asynchronous actions.
+* You can even write a custom middleware to describe calls to your API, like the [real world example](../introduction/Examples.md#real-world) does.
 
 It is up to you to try a few options, choose a convention you like, and follow it, whether with, or without the middleware.
 
@@ -511,3 +518,4 @@ Dispatching async actions is no different from dispatching synchronous actions, 
 ## Next Steps
 
 Read [Async Flow](AsyncFlow.md) to recap how async actions fit into the Redux flow.
+
