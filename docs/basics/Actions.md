@@ -6,7 +6,7 @@ First, let's define some actions.
 
 **Actions** are payloads of information that send data from your application to your store. They are the _only_ source of information for the store. You send them to the store using [`store.dispatch()`](../api/Store.md#dispatch).
 
-Action は情報を持った貨物のようなもので、アプリケーションから store へと運ばれます。Action は情報だけをもっています。store.dispatch\(\)を使ってその情報をstoreへ運びます。
+Action は情報の弾頭の爆発物のようなもので、情報をアプリケーションから store へと運びます。Action は store へと運ばれる唯一の情報源です。store.dispatch\(\) を使ってaction を store へと運ぶことができます。
 
 Here's an example action which represents adding a new todo item:
 
@@ -138,7 +138,7 @@ dispatch\(\)関数は、storeから直接、store.dispatch\(\)という形でア
 
 Action creators can also be asynchronous and have side-effects. You can read about [async actions](../advanced/AsyncActions.md) in the [advanced tutorial](../advanced/README.md) to learn how to handle AJAX responses and compose action creators into async control flow. Don't skip ahead to async actions until you've completed the basics tutorial, as it covers other important concepts that are prerequisite for the advanced tutorial and async actions.
 
-Actionクリエイターは非同期で、かつ副次的効果をもたらしてしまいます。 [async actions](http://redux.js.org/docs/advanced/AsyncActions.html) を読んで、AJAXの返答や、action creatorを同期的なフローの中に組み込む方法を学習してください。async action に進むのは、reduxの基本的なチュートリアルを終えてからにしてください。基本的なチュートリアルには、より高度なチュートリアルと、それからasync action の理解に必要な、重要な前提知識が含まれているからです。
+Actionクリエイターは非同期で、かつ副次的効果をもたらしてしまいます。 [async actions](http://redux.js.org/docs/advanced/AsyncActions.html) を読んで、AJAXの返答や、action creatorを同期的なフローの中に組み込む方法を学習してください。async action に進むのは、reduxの基本的なチュートリアルを終えてからにしてください。基本的なチュートリアルには、より高度なチュートリアルと、それからasync action の理解に必要な、重要な前提知識が含まれているからです。
 
 ## Source Code
 

@@ -95,7 +95,7 @@ The whole state of your app is stored in an object tree inside a single *store*.
 The only way to change the state tree is to emit an *action*, an object describing what happened.  
 To specify how the actions transform the state tree, you write pure *reducers*.
 
-あなたが作っているアプリケーションの状態 state を全て、たったひとつのオブジェクトで管理し、そしてそれを”store” という変数に入れる。(訳注：もしくは store という概念と紐付けて運用する) 状態を変更する方法は制限されており、”action”を発行する(=emit) 方法だけしかない。action は”何を起こすか”が述べられているオブジェクトである。”action”が状態に対して、どのような変更を加えるのかは、”reducer” によって定義する。reducer は純粋関数である必要がある。
+あなたが作っているアプリケーションの状態 state を全て、たったひとつのオブジェクトで管理し、そしてそれを”store” という変数に入れる。(訳注：もしくは store という概念と紐付けて運用する) 状態を変更する方法は制限されており、”action”を発行する(=emit) 方法だけしかない。action は”何を起こすか”が述べられているオブジェクトである。”action”が state をどのように変更するのかは、”reducer” によって定義する。reducer は純粋関数である必要がある。
 
 (訳注：純粋関数については例えばこの記事を参照。Redux と state の関連では、私が理解する限り、関数の引数で与えられたもの以外の変動する値を関数内部で使わない(例えば引数では与えられていないグローバル変数など)、引数で与えられたものそのものを変更しない＝イミュータブル、return で新たなstateを返す、というルールを守れば良い。)
 
@@ -156,7 +156,7 @@ function counter(state = 0, action) {
 // 状態を与えています。
 // (訳注：さらに、引数としてreducerであるcounterを与えている。
 // reducerには初期値が与えられているので結果として、ここではstate=0が与えられている。)
-// このようにして作られたstoreには{ subscribe, dispatch, getState } などの API を持っています。
+// このようにして作られたstore は{ subscribe, dispatch, getState } などの API を持っています。
 let store = createStore(counter)
 
 // You can use subscribe() to update the UI in response to state changes.
