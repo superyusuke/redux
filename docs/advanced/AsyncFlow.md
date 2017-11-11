@@ -10,7 +10,7 @@ createStore\(\) に対して applyMiddleware\(\) を用いることで、これ�
 
 Asynchronous middleware like [redux-thunk](https://github.com/gaearon/redux-thunk) or [redux-promise](https://github.com/acdlite/redux-promise) wraps the store's [`dispatch()`](../api/Store.md#dispatch) method and allows you to dispatch something other than actions, for example, functions or Promises. Any middleware you use can then interpret anything you dispatch, and in turn, can pass actions to the next middleware in the chain. For example, a Promise middleware can intercept Promises and dispatch a pair of begin/end actions asynchronously in response to each Promise.
 
-[redux-thunk](https://github.com/gaearon/redux-thunk) や [redux-promise](https://github.com/acdlite/redux-promise) といったミドルウェアは store の dispatch\(\) メソッドをラップし、それによって action 以外の、例えば function や promise を dispatch することを可能にします。
+[redux-thunk](https://github.com/gaearon/redux-thunk) や [redux-promise](https://github.com/acdlite/redux-promise) といったミドルウェアは、store の dispatch\(\) メソッドをラップし、それによって action 以外の、例えば function や promise を dispatch することを可能にします。
 
 When the last middleware in the chain dispatches an action, it has to be a plain object. This is when the [synchronous Redux data flow](../basics/DataFlow.md) takes place.
 
