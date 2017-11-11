@@ -25,7 +25,7 @@ const ADD_TODO = 'ADD_TODO'
 
 Actions are plain JavaScript objects. Actions must have a `type` property that indicates the type of action being performed. Types should typically be defined as string constants. Once your app is large enough, you may want to move them into a separate module.
 
-Action は単なるJSオブジェクトです。Action は必ず type プロパティを持たなくてはいけません。これによって実行されるアクションがどれなのかを示します。Typeは一般的に文字列の定数によって定義されます。アプリケーションが大きくなってきた場合には、これらを分割してモジュールとして管理することもできます。
+Action は単なるJSオブジェクトです。Action は必ず type プロパティを持たなくてはいけません。これによって実行されるアクションがどれなのかを示します。Typeは一般的に文字列の定数によって定義されます。アプリケーションが大きくなってきた場合には、これらを分割したモジュールで理することもできます。
 
 ```js
 import { ADD_TODO, REMOVE_TODO } from '../actionTypes'
