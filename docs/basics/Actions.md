@@ -43,7 +43,7 @@ typeの他にも、action オブジェクトには、どのような構造をも
 
 We'll add one more action type to describe a user ticking off a todo as completed. We refer to a particular todo by `index` because we store them in an array. In a real app, it is wiser to generate a unique ID every time something new is created.
 
-今回はもう一つactionを追加しましょう。todo リストが完了した際に実行されるアクションです。特定のtodoアイテムをindexによって参照します。todoアイテムはstoreの中に配列として持つことになるので、これを参照するためです。実際のアプリケーションにおいては、新しいアイテムが作られる度に、ユニークなIDを生成するほうが賢いやり方でしょう。
+今回はもう一つ action を追加しましょう。todo リストが完了した際に実行されるアクションです。特定の todo アイテムを index によって参照します。todo アイテムは store の中に配列として持つことになるので、これを index によって参照します。実際のアプリケーションにおいては、新しいアイテムが作られる度に、ユニークなIDを生成することになるでしょう。
 
 ```js
 {
