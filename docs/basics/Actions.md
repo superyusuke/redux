@@ -107,7 +107,7 @@ function addTodoWithDispatch(text) {
 In Redux this is _not_ the case.  
 Instead, to actually initiate a dispatch, pass the result to the `dispatch()` function:
 
-しかし、Redux においてはそうではありません。その代わりに、dispatchを実際に初期化し、その結果を dispatch() 関数へと渡します。
+しかし、Redux においてはそうではありません。その代わりに、dispatch を起動するために、その funtion の return の結果を dispatch() 関数へと渡すのです。
 
 ```js
 dispatch(addTodo(text))
