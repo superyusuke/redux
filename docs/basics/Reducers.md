@@ -8,18 +8,18 @@ Actionは何かが発生した、という事実を記述していました。�
 
 In Redux, all the application state is stored as a single object. It's a good idea to think of its shape before writing any code. What's the minimal representation of your app's state as an object?
 
-Reduxにおいては、アプリケーションの全ての状態は、ひとつのオブジェクトとして保持されます。コードを書く前に、状態がどのような形になるのか考えてみることにしましょう。あなたのアプリケーションの状態を表すオブジェクトは、一番簡潔に表現するとしたら、どのようなものになるでしょうか？
+Reduxにおいては、アプリケーションの全ての状態は、ひとつのオブジェクトとして保持されます。コードを書く前に、状態がどのような形になるのか考えてみることにしましょう。あなたのアプリケーションの状態を一番簡潔に表現するオブジェクトは、どのようなものになるでしょうか？
 
 For our todo app, we want to store two different things:
 
-いまから作ろうとしているtodo appにおいては、二つの異なるものを保持しないといけませんね。
+いまから作ろうとしている todo app においては、二つの異なるものを保持しないといけませんね。
 
 * The currently selected visibility filter;  現在選択されているフィルター
-* The actual list of todos.  todoの書かれたリスト
+* The actual list of todos.  todo の書かれたリスト
 
 You'll often find that you need to store some data, as well as some UI state, in the state tree. This is fine, but try to keep the data separate from the UI state.
 
-
+時には data と、それから UI の状態をも、state tree に保存したい場合もあることかとおもいます。もちろんそれはかまいませんが、data と UI の状態は、必ず分けるようにしましょう。
 
 ```js
 {
@@ -40,16 +40,22 @@ You'll often find that you need to store some data, as well as some UI state, in
 > ##### Note on Relationships
 >
 > In a more complex app, you're going to want different entities to reference each other. We suggest that you keep your state as normalized as possible, without any nesting. Keep every entity in an object stored with an ID as a key, and use IDs to reference it from other entities, or lists. Think of the app's state as a database. This approach is described in [normalizr's](https://github.com/paularmstrong/normalizr) documentation in detail. For example, keeping `todosById: { id -> todo }` and `todos: array<id>` inside the state would be a better idea in a real app, but we're keeping the example simple.
+>
+> ？
 
 ## Handling Actions
 
 Now that we've decided what our state object looks like, we're ready to write a reducer for it. The reducer is a pure function that takes the previous state and an action, and returns the next state.
+
+さて state を表すオブジェクトをどのようなものにするかが決まったので、reducer を書いていきましょう。reducer は純粋関数であって、以前の state と action を受け取り、そして次の状態を return するものです。
 
 ```js
 (previousState, action) => newState
 ```
 
 It's called a reducer because it's the type of function you would pass to [`Array.prototype.reduce(reducer, ?initialValue)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). It's very important that the reducer stays pure. Things you should **never** do inside a reducer:
+
+この関数が reducer と呼ばれるのは、`Array.prototype.reduce(reducer, ?initialValue)`に渡されるからです。また、reducer が純粋関数であることは非常に大切です。次のようなことは絶対に reducer の中で行ってはいけません。
 
 * Mutate its arguments;
 * Perform side effects like API calls and routing transitions;
