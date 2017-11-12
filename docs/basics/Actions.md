@@ -71,7 +71,7 @@ Finally, we'll add one more action type for changing the currently visible todos
 
 **Action creators** are exactly that—functions that create actions. It's easy to conflate the terms “action” and “action creator,” so do your best to use the proper term.
 
-Action creator はアクションを作る関数です。action と　action creator は混同しやすいので、適切な言葉をしっかり使えるように注意してください。
+Action creator はアクションを作る関数です。action と　action creator は混同しやすいので、適切な言葉を使うように注意してください。
 
 In Redux action creators simply return an action:
 
