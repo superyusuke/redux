@@ -67,7 +67,11 @@ We'll explore how to perform side effects in the [advanced walkthrough](../advan
 
 With this out of the way, let's start writing our reducer by gradually teaching it to understand the [actions](Actions.md) we defined earlier.
 
+これらを踏まえた上で、reducer を書いていきましょう。そうすることで、action に対してどのように reducer が反応するのかを、指示していきます。
+
 We'll start by specifying the initial state. Redux will call our reducer with an `undefined` state for the first time. This is our chance to return the initial state of our app:
+
+まずは最初の state を定義します。redux は、最初は 
 
 ```js
 import { VisibilityFilters } from './actions'
