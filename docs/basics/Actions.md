@@ -25,7 +25,7 @@ const ADD_TODO = 'ADD_TODO'
 
 Actions are plain JavaScript objects. Actions must have a `type` property that indicates the type of action being performed. Types should typically be defined as string constants. Once your app is large enough, you may want to move them into a separate module.
 
-Action は単なるJSオブジェクトです。Action は必ず type プロパティを持たなくてはいけません。これによって実行されるアクションがどれなのかを示します。Typeは一般的に文字列の定数によって定義されます。アプリケーションが大きくなってきた場合には、これらを分割したモジュールで管理することもできます。(訳注: type: 'ADDTODO'のように直接文字列を指定することもできるが、一旦 const ADD\_TODO = 'ADD\_TODO' のように定数として定義してから、type: ADD\_TODO と定数を使って定義する方が良いということ。また、この const ADD\_TODO の部分だけを別モジュールに切り出して、以下のように import すると、アプリケーションが大きくなった際に見通しが良いということ。)
+Action は単なるJSオブジェクトです。Action は必ず type プロパティを持たなくてはいけません。これによって実行されるアクションがどれなのかを示します。Typeは一般的に文字列の定数によって定義されます。アプリケーションが大きくなってきた場合には、これらを分割したモジュールで管理することもできます。\(訳注: type: 'ADDTODO'のように直接文字列を指定することもできるが、一旦 const ADD\_TODO = 'ADD\_TODO' のように定数として定義してから、type: ADD\_TODO と定数を使って定義する方が良いということ。また、この const ADD\_TODO の部分だけを別モジュールに切り出して、以下のように import すると、アプリケーションが大きくなった際に見通しが良いということ。\)
 
 ```js
 import { ADD_TODO, REMOVE_TODO } from '../actionTypes'
@@ -107,7 +107,7 @@ function addTodoWithDispatch(text) {
 In Redux this is _not_ the case.  
 Instead, to actually initiate a dispatch, pass the result to the `dispatch()` function:
 
-しかし、Redux においてはそうではありません。その代わりに、dispatch を起動するために、その funtion の return の結果を dispatch() 関数へと渡すのです。
+しかし、Redux においてはそうではありません。その代わりに、dispatch を起動するために、その funtion の return の結果を dispatch\(\) 関数へと渡すのです。
 
 ```js
 dispatch(addTodo(text))
@@ -125,7 +125,7 @@ const boundCompleteTodo = index => dispatch(completeTodo(index))
 
 Now you'll be able to call them directly:
 
-こうすることで、これらの dispatch を直接実行することができます。\(訳注：addTodo という action クリエイターと dispatach を関連付けた関数、boudAddTodoを作って、これを呼び出せば、アクションクリエイターもdispatchも同時に実行されるので、毎回それぞれを書かなくて良いので便利。)
+こうすることで、これらの dispatch を直接実行することができます。\(訳注：addTodo という action クリエイターと dispatach を関連付けた関数、boudAddTodoを作って、これを呼び出せば、アクションクリエイターもdispatchも同時に実行されるので、毎回それぞれを書かなくて良いので便利。\)
 
 ```
 boundAddTodo(text)
@@ -134,11 +134,11 @@ boundCompleteTodo(index)
 
 The `dispatch()` function can be accessed directly from the store as [`store.dispatch()`](../api/Store.md#dispatch), but more likely you'll access it using a helper like [react-redux](http://github.com/gaearon/react-redux)'s `connect()`. You can use [`bindActionCreators()`](../api/bindActionCreators.md) to automatically bind many action creators to a `dispatch()` function.
 
-dispatch()関数は、storeから直接、store.dispatch()という形でアクセすることができます。ですが、より使われるのは、react-reduxのconnect()というヘルパー関数を用いて、アクセスする方法です。さらにbindActionCreators()をつかってたくさんのactionクリエイターをdispatch()関数に紐付けることもできます。
+dispatch\(\) 関数は、storeから直接、store.dispatch\(\) という形でアクセすることができます。ですが、より使われるのは、react-redux の connect\(\) というヘルパー関数を用いて、アクセスする方法です。さらにbindActionCreators\(\) を複数のactionクリエイターを dispatch\(\) 関数に紐付けることもできます。
 
 Action creators can also be asynchronous and have side-effects. You can read about [async actions](../advanced/AsyncActions.md) in the [advanced tutorial](../advanced/README.md) to learn how to handle AJAX responses and compose action creators into async control flow. Don't skip ahead to async actions until you've completed the basics tutorial, as it covers other important concepts that are prerequisite for the advanced tutorial and async actions.
 
-Actionクリエイターは非同期で、かつ副次的効果をもたらしてしまいます。 [async actions](http://redux.js.org/docs/advanced/AsyncActions.html) を読んで、AJAXの返答や、action creatorを同期的なフローの中に組み込む方法を学習してください。async action に進むのは、reduxの基本的なチュートリアルを終えてからにしてください。基本的なチュートリアルには、より高度なチュートリアルと、それからasync action の理解に必要な、重要な前提知識が含まれているからです。
+Actionクリエイターは非同期で、かつ副次的効果をもたらしてしまいます。 [async actions](http://redux.js.org/docs/advanced/AsyncActions.html) を読んで、AJAXの返答や、action creator を同期的なフローの中に組み込む方法を学習してください。async action に進むのは、reduxの基本的なチュートリアルを終えてからにしてください。基本的なチュートリアルには、より高度なチュートリアルと、それからasync action の理解に必要な、重要な前提知識が含まれているからです。
 
 ## Source Code
 
@@ -184,5 +184,5 @@ export function setVisibilityFilter(filter) {
 
 Now let's [define some reducers](Reducers.md) to specify how the state updates when you dispatch these actions!
 
-次はreducerを定義していきましょう。これによって、actionがディスパッチされた際に、どのようにstateをアップデートするかを定義します。
+次はreducerを定義していきましょう。これによって、action がディスパッチされた際に、どのようにstateをアップデートするかを定義します。
 
