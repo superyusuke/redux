@@ -92,7 +92,7 @@ This makes them portable and easy to test.
 
 In [traditional Flux](http://facebook.github.io/flux), action creators often trigger a dispatch when invoked, like so:
 
-伝統的なFluxにおいては、アクションクリエイターは呼び出された場合に、たいていの場合、dispatchをもトリガーします。
+伝統的なFluxにおいては、アクションクリエイターは呼び出された場合に、たいていの場合、dispatchをもトリガーするものでした。
 
 ```js
 function addTodoWithDispatch(text) {
@@ -107,7 +107,7 @@ function addTodoWithDispatch(text) {
 In Redux this is _not_ the case.  
 Instead, to actually initiate a dispatch, pass the result to the `dispatch()` function:
 
-しかし、Redux においてはそうではありません。その代わりに、dispatchを実際に初期化し、その結果をdispatch\(\)関数へと渡します。
+しかし、Redux においてはそうではありません。その代わりに、dispatchを実際に初期化し、その結果を dispatch() 関数へと渡します。
 
 ```js
 dispatch(addTodo(text))
