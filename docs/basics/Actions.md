@@ -125,7 +125,7 @@ const boundCompleteTodo = index => dispatch(completeTodo(index))
 
 Now you'll be able to call them directly:
 
-こうすることで、これらのdispatchを直接実行することができます。\(訳注：addTodoというactionクリエイターとdispatachを関連付けた関数、boudAddTodoを作って、これを呼び出せば、アクションクリエイターもdispatchも同時に実行されるので、毎回それぞれを書かなくて良いので便利。\)
+こうすることで、これらの dispatch を直接実行することができます。\(訳注：addTodo という action クリエイターと dispatach を関連付けた関数、boudAddTodoを作って、これを呼び出せば、アクションクリエイターもdispatchも同時に実行されるので、毎回それぞれを書かなくて良いので便利。)
 
 ```
 boundAddTodo(text)
