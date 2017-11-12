@@ -116,7 +116,7 @@ dispatch(completeTodo(index))
 
 Alternatively, you can create a **bound action creator** that automatically dispatches:
 
-他の方法としてbound action creator を作る方法もあります。これは自動的に dispatch を呼び出すものです。
+他の方法として bound action creator を作る方法もあります。これは自動的に dispatch を呼び出すものです。
 
 ```js
 const boundAddTodo = text => dispatch(addTodo(text))
