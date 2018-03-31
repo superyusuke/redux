@@ -58,7 +58,7 @@ It's called a reducer because it's the type of function you would pass to [`Arra
 この関数が reducer と呼ばれるのは、`Array.prototype.reduce(reducer, ?initialValue)`に渡されるからです。また、reducer が純粋関数であることは非常に大切です。次のようなことは絶対に reducer の中で行ってはいけません。
 
 * Mutate its arguments; 引数を mutate する。
-* Perform side effects like API calls and routing transitions; API の呼び出しや、? routing transition のように、副作用が生じさせること。
+* Perform side effects like API calls and routing transitions; API の呼び出しや、? routing transition のように、副作用を生じさせること。
 * Call non-pure functions, e.g. `Date.now()` or `Math.random()`. pure-function ではないものを呼び出すこと。
 
 We'll explore how to perform side effects in the [advanced walkthrough](../advanced/README.md). For now, just remember that the reducer must be pure. **Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.**
@@ -71,7 +71,7 @@ With this out of the way, let's start writing our reducer by gradually teaching 
 
 We'll start by specifying the initial state. Redux will call our reducer with an `undefined` state for the first time. This is our chance to return the initial state of our app:
 
-まずは最初の state を定義します。redux は、最初は 
+まずは最初の state を定義します。redux は、最初は
 
 ```js
 import { VisibilityFilters } from './actions'
