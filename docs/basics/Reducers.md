@@ -108,7 +108,7 @@ function todoApp(state = initialState, action) {
 
 Now let's handle `SET_VISIBILITY_FILTER`. All it needs to do is to change `visibilityFilter` on the state. Easy:
 
-では `SET_VISIBILITY_FILTER` というアクションを扱うようにこうしていきましょう。
+では `SET_VISIBILITY_FILTER` というアクションを扱うように変更していきましょう。
 
 ```js
 function todoApp(state = initialState, action) {
