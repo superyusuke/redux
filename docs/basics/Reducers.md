@@ -88,6 +88,8 @@ function todoApp(state, action) {
 
   // For now, don't handle any actions
   // and just return the state given to us.
+  // 今のところ、action を全く扱わず
+  // 単に与えられた state を返しています
   return state
 }
 ```
