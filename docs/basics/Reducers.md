@@ -96,7 +96,7 @@ function todoApp(state, action) {
 
 One neat trick is to use the [ES6 default arguments syntax](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/default_parameters) to write this in a more compact way:
 
-この際に便利な方法として、ES6 の引数の初期値を決めるシンタックスを使用すると、より簡潔に書くことができます。
+この際に、ES6 の引数の初期値を決めるシンタックスを使用すると、より簡潔に書くことができます。
 
 ```js
 function todoApp(state = initialState, action) {
@@ -107,6 +107,8 @@ function todoApp(state = initialState, action) {
 ```
 
 Now let's handle `SET_VISIBILITY_FILTER`. All it needs to do is to change `visibilityFilter` on the state. Easy:
+
+では `SET_VISIBILITY_FILTER` というアクションを扱うようにこうしていきましょう。
 
 ```js
 function todoApp(state = initialState, action) {
