@@ -71,7 +71,7 @@ With this out of the way, let's start writing our reducer by gradually teaching 
 
 We'll start by specifying the initial state. Redux will call our reducer with an `undefined` state for the first time. This is our chance to return the initial state of our app:
 
-まずは最初の state を定義します。redux は、最初は state が `undefined` の状態で reducer を呼び出します。このタイミングで state の初期値を返すようにするのがよいでしょう。
+まずは最初の state を定義します。redux は、最初に state が `undefined` の状態で reducer を呼び出します。このタイミングで state の初期値を返すようにするのがよいでしょう。
 
 ```js
 import { VisibilityFilters } from './actions'
