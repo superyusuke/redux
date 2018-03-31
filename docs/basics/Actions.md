@@ -6,7 +6,7 @@ First, let's define some actions.
 
 **Actions** are payloads of information that send data from your application to your store. They are the _only_ source of information for the store. You send them to the store using [`store.dispatch()`](../api/Store.md#dispatch).
 
-Action は情報の弾頭の爆発物のようなもので、情報をアプリケーションから store へと運びます。Action は store へと運ばれる唯一の情報源です。store.dispatch\(\) を使ってaction を store へと運ぶことができます。
+Action は情報の貨物のようなもので、アプリケーションからの情報を store へと運びます。Action は store へと運ばれる唯一の情報源です。store.dispatch\(\) を使ってaction を store へと運ぶことができます。
 
 Here's an example action which represents adding a new todo item:
 
