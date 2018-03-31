@@ -63,7 +63,7 @@ It's called a reducer because it's the type of function you would pass to [`Arra
 
 We'll explore how to perform side effects in the [advanced walkthrough](../advanced/README.md). For now, just remember that the reducer must be pure. **Given the same arguments, it should calculate the next state and return it. No surprises. No side effects. No API calls. No mutations. Just a calculation.**
 
-副作用については [advanced walkthrough](../advanced/README.md) でより探求をします。今の所は、reducer は純粋関数でなければいけない、と覚えておいてください。同じ引数が与えられれば、計算によていつでも同じ次の状態が return されます。かならず予想通りに動くのです。副作用は起きません。API を呼び出さない。mutation も起こさない。計算だけが行われます。これが reducer です。
+副作用については [advanced walkthrough](../advanced/README.md) でより探求をします。今の所は、reducer は純粋関数でなければいけない、と覚えておいてください。同じ引数が与えられれば、計算によていつでも同じ次の状態が return されます。かならず予想通りに動くのです。副作用は起こさず、API を呼び出さない。mutation も起こさない。計算だけが行われます。これが reducer です。
 
 With this out of the way, let's start writing our reducer by gradually teaching it to understand the [actions](Actions.md) we defined earlier.
 
